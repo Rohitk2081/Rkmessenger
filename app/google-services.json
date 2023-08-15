@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "958762357298",
+    "project_id": "rkmessenger-724a2",
+    "storage_bucket": "rkmessenger-724a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958762357298:android:07ab4588ef2756a919622b",
+        "android_client_info": {
+          "package_name": "com.example.rkmessenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "958762357298-a0qi81m4ib56375rsb4ch8docen2i5qj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCV6HfGv0LY6zD96RDGlfNc7R4q5ULXyjA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "958762357298-a0qi81m4ib56375rsb4ch8docen2i5qj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
