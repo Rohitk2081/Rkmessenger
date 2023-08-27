@@ -2,12 +2,16 @@ package com.example.rkmessenger;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -76,10 +80,35 @@ public class registration extends AppCompatActivity {
          rg_profile.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
+                 showImagePickerDialog();
+             }
+             private void showImagePickerDialog() {
+                 AlertDialog.Builder builder = new AlertDialog.Builder(registration.this);
+                 builder.setTitle("Choose Image Source")
+                         .setItems(new CharSequence[]{"Gallery", "Camera"}, new DialogInterface.OnClickListener() {
+                             @Override
+                             public void onClick(DialogInterface dialogInterface, int which) {
+                                 if (which == 0) {
+                                     // Choose from gallery
+                                     pickImageFromGallery();
+                                 } else if (which == 1) {
+                                     // Capture from camera
+                                     captureImageFromCamera();
+                                 }
+                             }
+                         })
+                         .show();
+             }
+             private void pickImageFromGallery() {
                  Intent intent = new Intent();
                  intent.setType("image/*");
                  intent.setAction(Intent.ACTION_GET_CONTENT);
-                 startActivityForResult(Intent.createChooser(intent, "select picture"),10);
+                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), 10);
+             }
+
+             private void captureImageFromCamera() {
+                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                 startActivityForResult(intent, 11);
              }
          });
 
@@ -182,12 +211,15 @@ public class registration extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 10)
-        {
-            if(data!=null)
-            {
-                imageURI = data.getData();
-                rg_profile.setImageURI(imageURI);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 10 && data != null) {
+                // Handle gallery image selection
+                Uri selectedImageUri = data.getData();
+                // Perform actions with the selected image URI
+            } else if (requestCode == 11 && data != null) {
+                // Handle camera image capture
+                Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
+                // Perform actions with the captured image bitmap
             }
         }
     }
